@@ -1,0 +1,97 @@
+@import "../_mixins.scss";
+
+.app__wrapper {
+  max-width: 750px;
+  width: 100%;
+  margin: 0 auto;
+}
+.Header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+}
+.content__wrapper {
+  background-color: var(--bg-2);
+  padding: 2rem;
+  border-radius: 12px;
+  @include smallDeviceSize {
+    padding: 1.5rem;
+  }
+}
+.emptyText {
+  // display: inline-block;
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: var(--black-2);
+  text-align: center;
+  margin: 0 auto;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  background-color: var(--gray-2);
+  width: max-content;
+  height: auto;
+}
+
+.title {
+  display: inline-block;
+  width: 100%;
+  font-family: "Poppins";
+  font-size: 4rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 2rem;
+  margin-bottom: 1.5rem;
+  color: var(--black-1);
+  @include smallDeviceSize {
+    font-size: 3rem;
+  }
+}
+
+.loader {
+  width: 35px;
+  height: 35px;
+  border: 5px solid var(--primaryPurple);
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  margin: 50px auto 0;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.pagination {
+  padding-top: 30px;
+  display: flex;
+  list-style: none;
+  gap: 15px;
+  justify-content: end;
+  align-items: center;
+}
+
+.active {
+  background-color: var(--primaryPurple);
+  cursor: default;
+  padding: 2px 5px;
+  border-radius: 4px;
+  color: var(--white);
+}
+
+.link {
+  font-size: 1.6rem;
+  cursor: pointer;
+}
+.disabled {
+  cursor: default;
+}
