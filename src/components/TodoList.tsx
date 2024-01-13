@@ -65,13 +65,6 @@ const TodoList = () => {
     }
   }, [error, errorDelete]);
 
-  const filteredTodoList = todoList.filter((item) => {
-    if (filterStatus === "all") {
-      return true;
-    }
-    return item.status === filterStatus;
-  });
-
   return (
     <>
       <motion.div
@@ -83,10 +76,8 @@ const TodoList = () => {
         <AnimatePresence>
           {loading ? (
             <span className={styles.loader} />
-          ) : filteredTodoList.length > 0 ? (
-            filteredTodoList.map((todo) => (
-              <TodoItem key={todo.id} todo={todo} />
-            ))
+          ) : todoList.length > 0 ? (
+            todoList.map((todo) => <TodoItem key={todo.id} todo={todo} />)
           ) : (
             <motion.p variants={child} className={styles.emptyText}>
               Нет задач
