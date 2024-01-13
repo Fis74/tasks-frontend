@@ -6,7 +6,7 @@ import { MdDelete, MdEdit } from "react-icons/md";
 import styles from "../styles/modules/todoItem.module.scss";
 import { getClasses } from "../utils/getClasses";
 import Popup from "./Popup";
-import { Todo } from "../types/types";
+import { Todo, Type } from "../types/types";
 import { deleteTodo } from "../redux/slices/todoSlice";
 import { useAppDispatch } from "../hooks/hook";
 import { FiActivity } from "react-icons/fi";
@@ -89,7 +89,7 @@ const TodoItem: FC<TodoItemProps> = ({ todo }) => {
       </motion.div>
       {updateModalOpen && (
         <Popup
-          type="update"
+          type={Type.update}
           modalOpen={updateModalOpen}
           setModalOpen={setUpdateModalOpen}
           todo={todo}

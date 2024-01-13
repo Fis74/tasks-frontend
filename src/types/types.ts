@@ -1,13 +1,23 @@
 export type Todo = {
   id: number;
   title: string;
-  status: string;
+  status: Status;
   description: string;
   createdAt: string;
   updatedAt: string;
 };
 
-export type Status = "success" | "pending" | "progress";
+export enum Status {
+  success = "success",
+  pending = "pending",
+  progress = "progress",
+  all = "all",
+}
+
+export enum Type {
+  add = "add",
+  update = "update",
+}
 
 export type AddTodo = {
   title: string;
@@ -20,5 +30,5 @@ export type Data = [Todo[], number];
 export type Query = {
   page: number;
   limit: number;
-  status: string;
+  status: Status;
 };

@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { AddTodo, Query, Todo } from "../../types/types";
+import { AddTodo, Query, Status, Todo } from "../../types/types";
 import {
   addTask,
   deleteTaskById,
@@ -16,7 +16,7 @@ export const fetchAll = createAsyncThunk(
 );
 
 export const deleteTodo = createAsyncThunk(
-  "todo/deleteTask",
+  "todo/deleteTodo",
   async (id: number) => {
     const data = await deleteTaskById(id);
     return data;
@@ -45,7 +45,7 @@ interface TasksState {
   error: boolean;
   loadingDelete: boolean;
   errorDelete: boolean;
-  filterStatus: string;
+  filterStatus: Status;
   loadingUpdate: boolean;
   loadingAdd: boolean;
   errorAddOrUpdate: boolean;
@@ -55,7 +55,7 @@ interface TasksState {
 }
 
 const initialValue = {
-  filterStatus: "all",
+  filterStatus: Status.all,
   todoList: [],
   loading: false,
   error: false,

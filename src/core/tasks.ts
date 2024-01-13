@@ -1,11 +1,11 @@
-import { AddTodo, Data, Query, Todo } from "../types/types";
+import { AddTodo, Data, Query, Status, Todo } from "../types/types";
 import axios from "./axios";
 
 export const fetchAllTasks = async (query: Query): Promise<Data> => {
   return (
     await axios.get(
       `/tasks?page=${query.page}&limit=${query.limit}${
-        query.status !== "all" ? `&status=${query.status}` : ""
+        query.status !== Status.all ? `&status=${query.status}` : ""
       }`
     )
   ).data;

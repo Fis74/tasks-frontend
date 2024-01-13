@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import styles from "../styles/modules/popup.module.scss";
 import loader from "../styles/modules/loader.module.scss";
 import Button from "./Button";
-import { Todo } from "../types/types";
+import { Status, Todo, Type } from "../types/types";
 import { useAppDispatch, useAppSelector } from "../hooks/hook";
 import { addTodo, updateTodo } from "../redux/slices/todoSlice";
 
@@ -41,22 +41,22 @@ const Popup: FC<PopupProps> = ({ type, modalOpen, setModalOpen, todo }) => {
   const dispatch = useAppDispatch();
   const [title, setTitle] = useState("");
   const [description, setDesc] = useState("");
-  const [status, setStatus] = useState("success");
+  const [status, setStatus] = useState<Status>(Status.success);
   const { loadingAdd, loadingUpdate, errorAddOrUpdate } = useAppSelector(
     (state) => state.todo
   );
   const [handle, setHandle] = useState(false);
   useEffect(() => {
-    if (type === "update" && todo) {
+    if (type === Type.update && todo) {
       setTitle(todo.title);
       setDesc(todo.description);
       setStatus(todo.status);
     }
     console.log(type);
-    if (type === "add") {
+    if (type === Type.add) {
       setTitle("");
       setDesc("");
-      setStatus("pending");
+      setStatus(Status.pending);
     }
   }, [type, todo]);
 
@@ -64,12 +64,12 @@ const Popup: FC<PopupProps> = ({ type, modalOpen, setModalOpen, todo }) => {
     if (errorAddOrUpdate) {
       toast.error("Ошибка");
     }
-    if (handle && type === "add" && !loadingAdd) {
+    if (handle && type === Type.add && !loadingAdd) {
       toast.success("Задача добавлена");
       setModalOpen(false);
       setHandle(false);
     }
-    if (handle && type === "update" && !loadingUpdate) {
+    if (handle && type === Type.update && !loadingUpdate) {
       toast.success("Задача обновлена");
       setModalOpen(false);
       setHandle(false);
@@ -87,7 +87,7 @@ const Popup: FC<PopupProps> = ({ type, modalOpen, setModalOpen, todo }) => {
       return;
     }
     if (title && status && description) {
-      if (type === "add") {
+      if (type === Type.add) {
         setHandle(true);
         dispatch(
           addTodo({
@@ -97,7 +97,7 @@ const Popup: FC<PopupProps> = ({ type, modalOpen, setModalOpen, todo }) => {
           })
         );
       }
-      if (type === "update") {
+      if (type === Type.update) {
         if (
           todo?.title !== title ||
           todo?.status !== status ||
@@ -153,7 +153,7 @@ const Popup: FC<PopupProps> = ({ type, modalOpen, setModalOpen, todo }) => {
 
             <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
               <h1 className={styles.formTitle}>
-                {type === "add" ? "Добавить" : "Изменить"} задачу
+                {type === Type.add ? "Добавить" : "Изменить"} задачу
               </h1>
               <label htmlFor="title">
                 Заголовок задачи
@@ -178,11 +178,11 @@ const Popup: FC<PopupProps> = ({ type, modalOpen, setModalOpen, todo }) => {
                 <select
                   id="status"
                   value={status}
-                  onChange={(e) => setStatus(e.target.value)}
+                  onChange={(e) => setStatus(e.target.value as Status)}
                 >
-                  <option value="pending">Ожидает выполнения</option>
-                  <option value="progress">В процессе</option>
-                  <option value="success">Выполнено</option>
+                  <option value={Status.pending}>Ожидает выполнения</option>
+                  <option value={Status.progress}>В процессе</option>
+                  <option value={Status.success}>Выполнено</option>
                 </select>
               </label>
               <div className={styles.buttonContainer}>
@@ -193,7 +193,7 @@ const Popup: FC<PopupProps> = ({ type, modalOpen, setModalOpen, todo }) => {
                 >
                   {loadingAdd || loadingUpdate ? (
                     <span className={loader.loader} />
-                  ) : type === "add" ? (
+                  ) : type === Type.add ? (
                     "Добавить"
                   ) : (
                     "Сохранить"
