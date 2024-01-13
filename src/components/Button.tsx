@@ -8,6 +8,7 @@ interface ButtonProps {
   children: React.ReactNode;
   onClick?: () => void;
   disabled?: boolean;
+  header?: boolean;
 }
 
 const Button: FC<ButtonProps> = ({
@@ -16,6 +17,7 @@ const Button: FC<ButtonProps> = ({
   children,
   onClick,
   disabled,
+  header,
 }) => {
   return (
     <button
@@ -24,6 +26,7 @@ const Button: FC<ButtonProps> = ({
       className={getClasses([
         styles.button,
         disabled ? styles[`button--secondary`] : styles[`button--${variant}`],
+        header && styles[`button__header`],
       ])}
       onClick={onClick}
     >

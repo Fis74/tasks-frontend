@@ -1,14 +1,12 @@
 @import "../_mixins.scss";
 
 .item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   padding: 1rem;
   background: var(--white);
   margin-bottom: 1.5rem;
   border-radius: 10px;
   border: 1px solid var(--primaryPurple);
+  max-width: 750px;
   &:last-child {
     margin-bottom: 0;
   }
@@ -18,6 +16,7 @@
   align-items: center;
   justify-content: flex-start;
   gap: 1rem;
+  max-width: 100%;
 }
 .svgBox {
   flex-basis: 25px;
@@ -45,37 +44,37 @@
 .texts {
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  min-width: 50%;
+  width: auto;
 }
 
 .description {
   font-size: 1.4rem;
   color: var(--black-2);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .todoText {
-  word-break: break-all;
   font-weight: 500;
   font-size: 2rem;
   color: var(--black-2);
-
-  &--success {
-    text-decoration: line-through;
-    opacity: 0.7;
-  }
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .time {
   display: block;
   font-size: 1.2rem;
   font-weight: 300;
-  margin-top: -0.2rem;
   color: var(--black-2);
 }
 .todoActions {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+  margin-left: auto;
 }
 .icon {
   font-size: 2rem;

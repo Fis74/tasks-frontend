@@ -9,7 +9,6 @@
   text-transform: capitalize;
   cursor: pointer;
   min-width: 150px;
-  overflow: hidden;
   &__select {
     color: var(--black-2);
     font-family: Poppins;
@@ -23,6 +22,9 @@
   &__disabled {
     background-color: var(--bg-3);
     color: var(--black-1);
+  }
+  &__header {
+    min-width: 200px;
   }
 }
 .button--primary {

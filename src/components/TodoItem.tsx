@@ -65,25 +65,25 @@ const TodoItem: FC<TodoItemProps> = ({ todo }) => {
               )}
             </p>
           </div>
-        </div>
-        <div className={styles.todoActions}>
-          <div
-            className={styles.icon}
-            onClick={() => handleUpdate()}
-            onKeyDown={() => handleUpdate()}
-            tabIndex={0}
-            role="button"
-          >
-            <MdEdit />
-          </div>
-          <div
-            className={styles.icon}
-            onClick={() => handleDelete()}
-            onKeyDown={() => handleDelete()}
-            tabIndex={0}
-            role="button"
-          >
-            <MdDelete />
+          <div className={styles.todoActions}>
+            <div
+              className={styles.icon}
+              onClick={() => handleUpdate()}
+              onKeyDown={() => handleUpdate()}
+              tabIndex={0}
+              role="button"
+            >
+              <MdEdit />
+            </div>
+            <div
+              className={styles.icon}
+              onClick={() => handleDelete()}
+              onKeyDown={() => handleDelete()}
+              tabIndex={0}
+              role="button"
+            >
+              <MdDelete />
+            </div>
           </div>
         </div>
       </motion.div>

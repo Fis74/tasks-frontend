@@ -21,8 +21,8 @@ const Header = () => {
   }, [dispatch, filter]);
 
   return (
-    <div className={styles.Header}>
-      <Button variant="primary" onClick={() => setModalOpen(true)}>
+    <div className={styles.header}>
+      <Button header onClick={() => setModalOpen(true)}>
         Добавить задачу
       </Button>
       <SelectButton

@@ -186,11 +186,7 @@ const Popup: FC<PopupProps> = ({ type, modalOpen, setModalOpen, todo }) => {
                 </select>
               </label>
               <div className={styles.buttonContainer}>
-                <Button
-                  type="submit"
-                  variant="primary"
-                  disabled={loadingAdd || loadingUpdate}
-                >
+                <Button type="submit" disabled={loadingAdd || loadingUpdate}>
                   {loadingAdd || loadingUpdate ? (
                     <span className={loader.loader} />
                   ) : type === Type.add ? (
