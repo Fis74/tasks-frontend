@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "http://localhost:7777",
+  baseURL: "https://tasks-tlqp.onrender.com",
 });
 
 export default instance;
