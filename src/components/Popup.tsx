@@ -161,7 +161,7 @@ const Popup: FC<PopupProps> = ({ type, modalOpen, setModalOpen, todo }) => {
                 {type === Type.update &&
                   "Создано: " +
                     formatRelative(
-                      subDays(new Date(todo!.updatedAt), 0),
+                      subDays(new Date(todo!.createdAt), 0),
                       new Date(),
                       { locale: ru }
                     )}
