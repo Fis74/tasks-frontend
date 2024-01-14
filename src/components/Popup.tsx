@@ -180,6 +180,7 @@ const Popup: FC<PopupProps> = ({ type, modalOpen, setModalOpen, todo }) => {
               <label htmlFor="title">
                 Заголовок задачи
                 <input
+                  placeholder="Введите текст..."
                   type="text"
                   id="title"
                   value={title}
@@ -189,6 +190,7 @@ const Popup: FC<PopupProps> = ({ type, modalOpen, setModalOpen, todo }) => {
               <label htmlFor="description">
                 Описание задачи
                 <input
+                  placeholder="Введите текст..."
                   type="text"
                   id="description"
                   value={description}

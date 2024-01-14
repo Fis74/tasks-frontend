@@ -62,12 +62,30 @@
       margin-bottom: 2rem;
       width: 100%;
       padding: 1rem;
-      border: none;
+      border: 1px solid var(--primaryPurple);
       background-color: var(--white);
       font-size: 1.6rem;
+      border-radius: 6px;
+      color: var(--black-1);
     }
   }
 }
+
+input:focus,
+select:focus {
+  outline: none;
+  border: 2px solid var(--primaryPurple);
+}
+
+input::placeholder {
+  font-size: 1.6rem;
+  color: var(--black-1);
+}
+
+input:focus::-webkit-input-placeholder {
+  opacity: 0;
+}
+
 .buttonContainer {
   display: flex;
   justify-content: flex-start;
