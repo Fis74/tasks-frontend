@@ -3,8 +3,8 @@ export type Todo = {
   title: string;
   status: Status;
   description: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date;
+  updatedAt: Date;
 };
 
 export enum Status {

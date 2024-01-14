@@ -58,11 +58,20 @@ const TodoItem: FC<TodoItemProps> = ({ todo }) => {
             <p className={getClasses([styles.todoText])}>{todo.title}</p>
             <p className={styles.description}>{todo.description}</p>
             <p className={styles.time}>
-              {formatRelative(
-                subDays(new Date(todo.createdAt), 0),
-                new Date(),
-                { locale: ru }
-              )}
+              {new Date(todo.updatedAt).getTime() >
+              new Date(todo.createdAt).getTime()
+                ? "редактировано: " +
+                  formatRelative(
+                    subDays(new Date(todo.updatedAt), 0),
+                    new Date(),
+                    { locale: ru }
+                  )
+                : "создано: " +
+                  formatRelative(
+                    subDays(new Date(todo.createdAt), 0),
+                    new Date(),
+                    { locale: ru }
+                  )}
             </p>
           </div>
           <div className={styles.todoActions}>

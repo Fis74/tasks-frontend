@@ -50,6 +50,7 @@
   margin-bottom: 2rem;
   text-transform: capitalize;
 }
+
 .form {
   width: 100%;
   label {
@@ -72,5 +73,14 @@
   justify-content: flex-start;
   align-items: center;
   margin-top: 2rem;
+  gap: 1rem;
+}
+.time {
+  font-size: 1.4rem;
+  color: var(--black-1);
+  margin-bottom: 1rem;
+}
+.timebox {
+  display: flex;
   gap: 1rem;
 }

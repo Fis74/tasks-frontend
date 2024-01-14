@@ -4,10 +4,12 @@ import { AnimatePresence, motion } from "framer-motion";
 import toast from "react-hot-toast";
 import styles from "../styles/modules/popup.module.scss";
 import loader from "../styles/modules/loader.module.scss";
-import Button from "./Button";
+import Button, { SelectButton } from "./Button";
 import { Status, Todo, Type } from "../types/types";
 import { useAppDispatch, useAppSelector } from "../hooks/hook";
 import { addTodo, updateTodo } from "../redux/slices/todoSlice";
+import { formatRelative, subDays } from "date-fns";
+import { ru } from "date-fns/locale";
 
 const dropIn = {
   hidden: {
@@ -41,7 +43,7 @@ const Popup: FC<PopupProps> = ({ type, modalOpen, setModalOpen, todo }) => {
   const dispatch = useAppDispatch();
   const [title, setTitle] = useState("");
   const [description, setDesc] = useState("");
-  const [status, setStatus] = useState<Status>(Status.success);
+  const [status, setStatus] = useState<Status>(Status.pending);
   const { loadingAdd, loadingUpdate, errorAddOrUpdate } = useAppSelector(
     (state) => state.todo
   );
@@ -52,7 +54,7 @@ const Popup: FC<PopupProps> = ({ type, modalOpen, setModalOpen, todo }) => {
       setDesc(todo.description);
       setStatus(todo.status);
     }
-    console.log(type);
+
     if (type === Type.add) {
       setTitle("");
       setDesc("");
@@ -111,7 +113,7 @@ const Popup: FC<PopupProps> = ({ type, modalOpen, setModalOpen, todo }) => {
               status,
               id: todo!.id,
               createdAt: todo!.createdAt,
-              updatedAt: todo!.updatedAt,
+              updatedAt: new Date(),
             })
           );
         } else {
@@ -155,6 +157,26 @@ const Popup: FC<PopupProps> = ({ type, modalOpen, setModalOpen, todo }) => {
               <h1 className={styles.formTitle}>
                 {type === Type.add ? "Добавить" : "Изменить"} задачу
               </h1>
+              <p className={styles.time}>
+                {type === Type.update &&
+                  "Создано: " +
+                    formatRelative(
+                      subDays(new Date(todo!.updatedAt), 0),
+                      new Date(),
+                      { locale: ru }
+                    )}
+              </p>
+              <p className={styles.time}>
+                {type === Type.update &&
+                  new Date(todo!.updatedAt).getTime() >
+                    new Date(todo!.createdAt).getTime() &&
+                  "Редактировано: " +
+                    formatRelative(
+                      subDays(new Date(todo!.updatedAt), 0),
+                      new Date(),
+                      { locale: ru }
+                    )}
+              </p>
               <label htmlFor="title">
                 Заголовок задачи
                 <input
@@ -175,15 +197,15 @@ const Popup: FC<PopupProps> = ({ type, modalOpen, setModalOpen, todo }) => {
               </label>
               <label htmlFor="status">
                 Статус задачи
-                <select
+                <SelectButton
                   id="status"
-                  value={status}
                   onChange={(e) => setStatus(e.target.value as Status)}
+                  value={status}
                 >
                   <option value={Status.pending}>Ожидает выполнения</option>
                   <option value={Status.progress}>В процессе</option>
                   <option value={Status.success}>Выполнено</option>
-                </select>
+                </SelectButton>
               </label>
               <div className={styles.buttonContainer}>
                 <Button type="submit" disabled={loadingAdd || loadingUpdate}>
